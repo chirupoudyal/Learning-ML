@@ -1,0 +1,250 @@
+set.seed(3)
+rnorm(5)
+x <- rnorm(100)
+y <- rnorm(100)
+plot(x, y)
+plot(x, y, xlab = "this is the x-axis",
+       ylab = "this is the y-axis", main = "Plot of X vs Y")
+
+install.packages ("jpeg")
+jpeg("Figure.jpeg")
+
+plot(x, y, col = "green") 
+dev.off()
+
+?par
+?contour
+install.packages("grDevices")
+library(Matrix)
+library(grDevices)
+x <- -6:16
+op <- par(mfrow = c(2, 2))
+contour(outer(x, x), method = "edge", vfont = c("sans serif", "plain"))
+z <- outer(x, sqrt(abs(x)), FUN = `/`)
+image(x, x, z)
+contour(x, x, z, col = "pink", add = TRUE, method = "edge",
+        vfont = c("sans serif", "plain"))
+contour(x, x, z, ylim = c(1, 6), method = "simple", labcex = 1,
+        xlab = quote(x[1]), ylab = quote(x[2]))
+contour(x, x, z, ylim = c(-6, 6), nlevels = 20, lty = 2, method = "simple",
+        main = "20 levels; \"simple\" labelling method")
+par(op)
+
+
+y <- x
+f <- outer(x, y, function(x, y) cos(y) / (1 + x^2))
+contour(x, y, f)
+contour(x, y, f, nlevels = 45, add = T)
+fa <- (f - t(f)) / 2
+contour(x, y, fa, nlevels = 15)
+
+
+image(x, y, fa)
+persp(x, y, fa) 
+persp(x, y, fa, theta = 30)
+persp(x, y, fa, theta = 30, phi = 20)
+persp(x, y, fa, theta = 30, phi = 70)
+persp(x, y, fa, theta = 30, phi = 40)
+
+install.packages("Matrix")
+library (ISLR2)
+Auto <- read.table("Auto.data")
+View(Auto)
+head(Auto)
+
+Auto <- read.csv("Auto.csv", na.strings = "?", stringsAsFactors = T)
+View(Auto1)
+head(Auto)
+dim(Auto)
+Auto[1:4,]
+Auto <- na.omit(Auto)
+dim(Auto)
+names(Auto)
+attach(Auto)
+plot(cylinders, mpg)
+cylinders <- as.factor(cylinders)
+
+plot(cylinders, mpg)
+plot(cylinders, mpg, col = "red")
+plot(cylinders, mpg, col = "red", varwidth = T)
+plot(cylinders, mpg, col = "red", varwidth = T, horizontal = T)
+plot(cylinders, mpg, col = "red", varwidth = T, xlab = "cylinders", ylab = "MPG")
+
+?hist
+hist(mpg)
+hist(mpg, col = 2)
+hist(mpg, col = 2, breaks = 15)
+
+pairs(Auto)
+pairs(
+  ~mpg + displacement + horsepower + weight + acceleration, data = Auto
+)
+
+plot(horsepower, mpg)
+identify(horsepower, mpg, name)
+
+package_paths <- .libPaths()
+print(package_paths)
+find.package("ISLR")
+
+library (ISLR)
+College = read.csv("college.csv")
+data("College")
+College
+names(College)
+dim(College)
+attach(College)
+head(College[,1])
+row.names(College) <- College[, 1] 
+View(College)
+
+College1 <- College[, -1] 
+View(College1)
+head(College)
+summary(College)
+A=College[,1:10]
+pairs(A, data=College)
+plot(Outstate, Private,xlab="outstate", ylab="private")
+
+Elite <- rep("No", nrow(College))
+Elite[College$Top10perc > 50] <- "Yes"
+Elite <- as.factor(Elite)
+College <- data.frame(College, Elite)
+head(College)
+plot(Outstate, Elite)
+par(mfrow=c(2,2))
+hist(Outstate, col=2, breaks=15)
+
+pairs(Auto)
+pairs(
+  ~mpg + displacement + horsepower + weight + acceleration, data = Auto
+)
+range(mpg,displacement,horsepower,weight,acceleration, data = Auto)
+
+summary(Auto)
+var(Auto)
+sqrt(var(Auto))
+sd(Auto)
+Auto1=Auto[-(10:85),]
+sqrt(var(Auto1))
+summary(Auto1)
+names(Auto)
+par(mfrow=c(1,1))
+plot (cylinders, mpg, xlab="cylinders", ylab="mpg")
+plot (year, mpg, xlab="year", ylab="mpg")
+range(year)
+plot (name, mpg, xlab="name", ylab="mpg")
+origin
+plot (origin, mpg, xlab="origin", ylab="mpg")
+
+library(ISLR2)
+?Boston
+attach(Boston)
+lm(medv ~ crim + rm, data=Boston)
+names(Boston)
+dim(Boston)
+pairs(Boston)
+plot(age ~ chas1)
+hist(chas,age)
+summary(ptratio)
+plot(lstat~age1)
+boxplot(lstat~age)
+plot(crim~age1)
+
+head(chas)
+chas1=as.factor(chas)
+age1=as.factor(age)
+pairs(~crim+nox+dis+tax+medv, data = Boston)
+cor(Boston[-1],crim)
+
+range(crim)
+mean(crim)
+sd(crim)
+medv(crim)
+head(Boston)
+
+High.Crime = Boston[which(Boston$crim > mean(Boston$crim) + 2*sd(Boston$crim)),]
+range(Boston$crim) ; mean(Boston$crim) ; sd(Boston$crim)
+
+High.tax = Boston[which(Boston$tax > mean(Boston$tax) + 2*sd(Boston$tax)),]
+range(tax)
+sd(tax)
+
+High.ptratio = Boston[which(ptratio > mean(ptratio) + 2*sd(ptratio)),]
+range(ptratio)
+plot(ptratio)
+
+High.medv = Boston[which(medv > mean(medv) +2*sd(medv)),]
+dim(High.medv)
+range(High.medv)
+plot(medv)
+
+plot(chas)
+sum(chas==0)
+median(ptratio)
+
+which(medv == min(medv))
+Boston[406,]
+range(medv)
+
+which(medv == max(medv))
+Boston[162,]
+
+range(rm)
+sum (rm > 7)
+sum (rm > 8)
+
+library(MASS)
+library(ISLR2)
+lm.fit=lm(medv~lstat)
+summary(lm.fit)
+names(lm.fit)
+confint(lm.fit, level=0.95)
+?confint
+range(lstat)
+predict(lm.fit, data.frame(lstat=(c(20,25,30))), interval="confidence")
+predict(lm.fit, data.frame(lstat=(c(20,25,30))), interval="prediction")
+lstat[20,]
+dim(lstat)
+head(lstat)
+
+plot(lstat,medv)
+abline(lm.fit)
+plot(lstat, medv, col = "red")
+plot(lstat, medv, pch = 20)
+plot(lstat, medv, pch = "+")
+plot(1:20, 1:20, pch = 1:20)
+par(mfrow = c(2, 2))
+plot(lm.fit)
+plot(hatvalues(lm.fit))
+
+par(mfrow=c(1,1))
+plot(predict(lm.fit), rstudent(lm.fit))
+which.max(hatvalues(lm.fit))
+
+lm.fit1=lm(medv~lstat+age, data=Boston)
+plot(lm.fit1)
+
+par(mfrow = c(2, 2))
+plot(lm.fit1)
+plot(lm.fit)
+summary(lm.fit1)
+
+lm.fit2=lm(medv~., data=Boston)
+summary(lm.fit2, correlation=TRUE)
+cor(lm.fit)
+?cor
+?summary.lm
+summary(lm.fit2)$r.sq
+install.packages("car")
+library(car)
+summary(lm.fit)$r.sq
+summary(lm.fit)$sigma
+vif(lm.fit)
+
+install.packages("carData")
+library(carData)
+vif(lm.fit)
+
+lm.fit1=lm(medv ~ . - age, data = Boston)
+summary(lm.fit1)
